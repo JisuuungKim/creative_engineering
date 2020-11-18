@@ -2,7 +2,12 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+interface MouseListener {
+public void mouseClicked(MouseEvent e);
+}
+
 public class CalculatorFrameEx2 extends JFrame {
+	
 	public CalculatorFrameEx2() {
 		super("환율 계산기");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,7 +24,7 @@ public class CalculatorFrameEx2 extends JFrame {
 		new CalculatorFrameEx2();
 	}
 
-}
+
 	class SouthPanel extends JPanel {
 	   public SouthPanel() {
 	      setBackground(Color.YELLOW);
@@ -41,11 +46,15 @@ public class CalculatorFrameEx2 extends JFrame {
 	   public CenterPanel() {
 		  
 	      setBackground(Color.WHITE);
+	      JButton[] bt = new JButton[10];
 	      setLayout(new GridLayout(4,3,4,4));
+	      
+	      
 	      for(int i=1; i<10; i++) {
-	         JButton b = new JButton(Integer.toString(i));
-	         b.addActionListener(new NumActionListener());
-	         add(b);
+	         bt[i] = new JButton(Integer.toString(i));
+	         bt[i].addActionListener(new NumActionListener());
+	         add(bt[i]);
+	         
 	      }
 	      JButton reset = new JButton("reset");
 	      reset.addActionListener(new ResetActionListener());
@@ -73,12 +82,12 @@ public class CalculatorFrameEx2 extends JFrame {
 	      add(new JLabel("  "));
 	      add(new JLabel("(달러)"));
 	      add(jtf2); }
-	}
+	} 
 	      
-	
+	public boolean check = true;	
 
 	class NumActionListener extends NorthPanel implements ActionListener {
-		static public boolean check = true;
+	   
 	   
 	   public void actionPerformed(ActionEvent e) {
 		  
@@ -104,13 +113,12 @@ public class CalculatorFrameEx2 extends JFrame {
 
 	class ResetActionListener extends NorthPanel implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JButton b = (JButton)e.getSource();
 			jtf1.setText("");									//tf1 텍스트를 빈칸으로
 			jtf2.setText("");									//tf2 텍스트를 빈칸으로
 		}
 	}
 	
-	class TransActionListener extends NumActionListener implements ActionListener {
+	class TransActionListener extends NorthPanel implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(check) {											// 만약 check가 true면 실행 : 현재 상태가 원->달러
 				String won = jtf1.getText();						// tf1값을 won에 string타입으로 저장
@@ -126,14 +134,16 @@ public class CalculatorFrameEx2 extends JFrame {
 		}
 	}
 	
-	class TrueActionListener extends NumActionListener implements ActionListener {
+	class TrueActionListener extends NorthPanel implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			check = true;											// 전역변수로 check 만든후에 버튼이 눌러지면 true로 변경
 		}
 	}
 	
-	class FalseActionListener extends NumActionListener implements ActionListener {
+	class FalseActionListener extends NorthPanel implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			check = false;											// 전역변수로 check 만든후에 버튼이 눌러지면 true로 변경
 		}
 	}
+}
+
