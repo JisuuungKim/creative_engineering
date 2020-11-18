@@ -2,9 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-interface MouseListener {
-public void mouseClicked(MouseEvent e);
-}
 
 public class CalculatorFrameEx2 extends JFrame {
 	
@@ -63,6 +60,7 @@ public class CalculatorFrameEx2 extends JFrame {
 	      zero.addActionListener(new NumActionListener());
 	      add(zero);
 	      JButton transform = new JButton("º¯È¯");
+	      transform.addActionListener(new TransActionListener());
 	      add(transform);
 	   }
 	}
