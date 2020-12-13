@@ -37,8 +37,8 @@
 #define _INTERVAL_SERIAL 100  //  시리얼 플로터 갱신 속도
 
 // PID parameters
-#define _KP 1.5  //  P 이득 비율
-#define _KD 72
+#define _KP 1.8  //  P 이득 비율
+#define _KD 58
 
 //////////////////////
 // global variables //
